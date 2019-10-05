@@ -1,0 +1,158 @@
+{
+  "flags": {},
+  "shapes": [
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          111,
+          376
+        ],
+        [
+          111,
+          564
+        ],
+        [
+          303,
+          564
+        ],
+        [
+          303,
+          376
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          393,
+          296
+        ],
+        [
+          393,
+          512
+        ],
+        [
+          576,
+          512
+        ],
+        [
+          576,
+          296
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          584,
+          219
+        ],
+        [
+          584,
+          429
+        ],
+        [
+          772,
+          429
+        ],
+        [
+          772,
+          219
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          600,
+          30
+        ],
+        [
+          600,
+          230
+        ],
+        [
+          780,
+          230
+        ],
+        [
+          780,
+          30
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          170,
+          140
+        ],
+        [
+          170,
+          320
+        ],
+        [
+          350,
+          320
+        ],
+        [
+          350,
+          140
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          160,
+          0
+        ],
+        [
+          160,
+          170
+        ],
+        [
+          310,
+          170
+        ],
+        [
+          310,
+          0
+        ]
+      ]
+    }
+  ],
+  "labels": [],
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ],
+  "imagePath": "Area1.PNG",
+  "imageData": null
+}

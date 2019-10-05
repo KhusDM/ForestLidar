@@ -1,0 +1,112 @@
+{
+  "flags": {},
+  "shapes": [
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          215,
+          415
+        ],
+        [
+          215,
+          579
+        ],
+        [
+          333,
+          579
+        ],
+        [
+          333,
+          415
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          63,
+          133
+        ],
+        [
+          63,
+          379
+        ],
+        [
+          289,
+          379
+        ],
+        [
+          289,
+          133
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          701,
+          167
+        ],
+        [
+          701,
+          435
+        ],
+        [
+          399,
+          435
+        ],
+        [
+          399,
+          167
+        ]
+      ]
+    },
+    {
+      "label": "Tree",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          371,
+          45
+        ],
+        [
+          371,
+          157
+        ],
+        [
+          565,
+          157
+        ],
+        [
+          565,
+          45
+        ]
+      ]
+    }
+  ],
+  "labels": [],
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ],
+  "imagePath": "Area2.PNG",
+  "imageData": null
+}
