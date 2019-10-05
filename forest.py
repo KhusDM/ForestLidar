@@ -19,7 +19,7 @@ def createLas(x, y, areaname, skip_step=1):
         y_point = inFile.Y[index] * y_scale + y_offset
         z_point = inFile.Z[index] * z_scale + z_offset
 
-        if (x[0] <= x_point <= x[1] and y[0] <= y_point <= y[1]):
+        if (x[0] <= x_point <= x[1] and y[0] <= y_point <= y[1] and 10 < z_point):
             # pointsPlot.append([x_point, y_point, z_point])
             pointsLas.append([inFile.X[index], inFile.Y[index], inFile.Z[index]])
 
@@ -48,7 +48,7 @@ def createLas(x, y, areaname, skip_step=1):
     outfile.close()
 
 
-filename = 'area1.las'
+filename = 'areas/area1.las'
 inFile = laspy.file.File(filename, mode='r')
 inHeader = laspy.header.HeaderManager(inFile.header, inFile.reader)
 x_offset, y_offset, z_offset = inHeader.offset
@@ -68,19 +68,29 @@ print("Кол-во точек в файле: {0}".format(points_count))
 # h2 = 1
 # createLas(x=x2, y=y2, skip_step=h2, areaname="area2")
 
-with open('label_json/Box/Area1.json', 'r', encoding='utf-8') as fh:
-    data = data = json.load(fh)
+with open('label_json/Box/Area1.json', 'r', encoding='utf-8') as json_file:
+    data = json.load(json_file)
 
+# area1.las coefficients
 a_x = 0.06
 b_x = 4207282.48
 a_y = -0.06
 b_y = 7544038.32
+
+# area2.las coefficients
+# a_x = 0.06
+# b_x = 4207282.4
+# a_y = -0.052
+# b_y = 7543998.9
+
+h = 1
 i = 1
 for item in data['shapes']:
-    points = item['points']
-    x = [points[0][0] * a_x + b_x, points[2][0] * a_x + b_x]
-    y = [points[2][1] * a_y + b_y, points[0][1] * a_y + b_y]
-    h = 1
+    points = np.array(item['points'])
+    x_min, x_max = min(points[:, 0]), max(points[:, 0])
+    y_min, y_max = min(points[:, 1]), max(points[:, 1])
+    x = [x_min * a_x + b_x, x_max * a_x + b_x]
+    y = [y_max * a_y + b_y, y_min * a_y + b_y]
     createLas(x=x, y=y, skip_step=h, areaname="area1_tree{0}".format(i))
     i += 1
 

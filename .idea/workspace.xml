@@ -6,14 +6,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="206891c9-fbfc-44c8-8ee8-929f3d09a1d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area1.las" beforeDir="false" afterPath="$PROJECT_DIR$/areas/area1.las" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area1_plot.html" beforeDir="false" afterPath="$PROJECT_DIR$/plots/area1_plot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area2.las" beforeDir="false" afterPath="$PROJECT_DIR$/areas/area2.las" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area2_plot.html" beforeDir="false" afterPath="$PROJECT_DIR$/plots/area2_plot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/den.las" beforeDir="false" afterPath="$PROJECT_DIR$/areas/den.las" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/perpendikularnopoperechno.las" beforeDir="false" afterPath="$PROJECT_DIR$/areas/perpendikularnopoperechno.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forest.py" beforeDir="false" afterPath="$PROJECT_DIR$/forest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree1.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree1.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree2.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree2.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree3.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree3.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree4.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree4.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree5.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree5.las" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_clouds/area1_tree6.las" beforeDir="false" afterPath="$PROJECT_DIR$/tree_clouds/area1_tree6.las" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="58" column="55" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
+            <state relative-caret-position="217">
+              <caret line="91" column="46" lean-forward="true" selection-start-line="91" selection-start-column="46" selection-end-line="91" selection-end-column="46" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -35,11 +35,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/label_json/Box/Area2.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/label_json/Box/Area1.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="128" column="14" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+            <state relative-caret-position="153">
+              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -92,6 +101,11 @@
               <item name="Forest2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Forest2" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Forest2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Forest2" type="462c0819:PsiDirectoryNode" />
+              <item name="tree_clouds" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -100,10 +114,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pointnet-master" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dmitry\PycharmProjects\Forest2\plots" />
+      <recent name="C:\Users\Dmitry\PycharmProjects\Forest2\areas" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dmitry\PycharmProjects\Forest2" />
     </key>
@@ -188,7 +206,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24851191" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24851191" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.32872504" />
@@ -196,8 +214,8 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32872504" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.32872504" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.39938557" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32872504" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.43010753" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -252,20 +270,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forest.py">
+    <entry file="file://$PROJECT_DIR$/label_json/Box/Area1.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="58" column="55" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/label_json/Box/Area1.json">
+    <entry file="file://$PROJECT_DIR$/label_json/Box/Area2.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="128" column="14" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+        <state relative-caret-position="612">
+          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="91" column="46" lean-forward="true" selection-start-line="91" selection-start-column="46" selection-end-line="91" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
