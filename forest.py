@@ -9,18 +9,13 @@ import numpy as np
 
 def createLas(x, y, areaname, skip_step=1):
     pointsLas = []
-    # pointsPlot = []
     index = counter = 0
     while (index + skip_step <= points_count):
-        # points.append(
-        #     [inFile.X[index] * x_scale + x_offset, inFile.Y[index] * y_scale + y_offset,
-        #      (-1) * inFile.Z[index] * z_scale + z_offset])
         x_point = inFile.X[index] * x_scale + x_offset
         y_point = inFile.Y[index] * y_scale + y_offset
         z_point = inFile.Z[index] * z_scale + z_offset
 
         if (x[0] <= x_point <= x[1] and y[0] <= y_point <= y[1] and 10 < z_point):
-            # pointsPlot.append([x_point, y_point, z_point])
             pointsLas.append([inFile.X[index], inFile.Y[index], inFile.Z[index]])
 
         index += skip_step
@@ -28,10 +23,6 @@ def createLas(x, y, areaname, skip_step=1):
 
     points_area_count = len(pointsLas)
     print("Кол-во точек для {0}: {1}".format(areaname, points_area_count))
-
-    # pointsPlot = np.array(pointsPlot)
-    # kmeans = KMeans(n_clusters=4, random_state=0).fit(pointsPlot)
-    # labels = kmeans.labels_
 
     # plotly.offline.plot({
     #     "data": [go.Scatter3d(x=pointsPlot[:, 0], y=pointsPlot[:, 1], z=pointsPlot[:, 2], showlegend=False,
@@ -48,6 +39,53 @@ def createLas(x, y, areaname, skip_step=1):
     outfile.close()
 
 
+def mark_las(areas, a_x, b_x, a_y, b_y, skip_step=1):
+    for area in areas:
+        area['points'] = np.array(area['points'])
+        area['points'][:, 0] = a_x * area['points'][:, 0] + b_x
+        area['points'][:, 1] = a_y * area['points'][:, 1] + b_y
+
+    index = 0
+    points_by_areas = dict()
+    while (index + skip_step <= points_count):
+        x_point = inFile.X[index] * x_scale + x_offset
+        y_point = inFile.Y[index] * y_scale + y_offset
+        z_point = inFile.Z[index] * z_scale + z_offset
+
+        isArea = False
+        for i in range(0, len(areas)):
+            points = areas[i]['points']
+            x_min, x_max = min(points[:, 0]), max(points[:, 0])
+            y_min, y_max = min(points[:, 1]), max(points[:, 1])
+
+            if (x_min <= x_point <= x_max and y_min <= y_point <= y_max and 10 < z_point):
+                if (not ('tree_{0}'.format(i + 1) in points_by_areas)):
+                    points_by_areas['tree_{0}'.format(i + 1)] = ''
+
+                r = g = b = 200
+                points_by_areas['tree_{0}'.format(i + 1)] += '{0} {1} {2} {3} {4} {5}\n'.format(x_point, y_point,
+                                                                                                z_point, r, g, b)
+                isArea = True
+                break
+
+        if (not (isArea)):
+            if (not ('other_1' in points_by_areas)):
+                points_by_areas['other_1'] = ''
+
+            r = g = b = 100
+            points_by_areas['other_1'] += '{0} {1} {2} {3} {4} {5}\n'.format(x_point, y_point, z_point, r, g, b)
+
+        if (not ('forest_1' in points_by_areas)):
+            points_by_areas['forest_1'] = ''
+
+        points_by_areas['forest_1'] += '{0} {1} {2} {3} {4} {5}\n'.format(x_point, y_point, z_point, r, g, b)
+        index += skip_step
+
+    for key in points_by_areas.keys():
+        with open('label_files/{0}.txt'.format(key), 'a') as file:
+            file.write(points_by_areas[key])
+
+
 filename = 'areas/area1.las'
 inFile = laspy.file.File(filename, mode='r')
 inHeader = laspy.header.HeaderManager(inFile.header, inFile.reader)
@@ -57,7 +95,7 @@ header = laspy.header.Header()
 
 points_count = len(inFile.points)
 print("Кол-во точек в файле: {0}".format(points_count))
-#
+
 # x = [4207281, 4207335]
 # y = [7544002, 7544041]
 # h = 1
@@ -83,204 +121,16 @@ b_y = 7544038.32
 # a_y = -0.052
 # b_y = 7543998.9
 
-h = 1
-i = 1
-for item in data['shapes']:
-    points = np.array(item['points'])
-    x_min, x_max = min(points[:, 0]), max(points[:, 0])
-    y_min, y_max = min(points[:, 1]), max(points[:, 1])
-    x = [x_min * a_x + b_x, x_max * a_x + b_x]
-    y = [y_max * a_y + b_y, y_min * a_y + b_y]
-    createLas(x=x, y=y, skip_step=h, areaname="area1_tree{0}".format(i))
-    i += 1
+# h = 1
+# i = 1
+# for item in data['shapes']:
+#     points = np.array(item['points'])
+#     x_min, x_max = min(points[:, 0]), max(points[:, 0])
+#     y_min, y_max = min(points[:, 1]), max(points[:, 1])
+#     x = [x_min * a_x + b_x, x_max * a_x + b_x]
+#     y = [y_max * a_y + b_y, y_min * a_y + b_y]
+#     createLas(x=x, y=y, skip_step=h, areaname="area1_tree{0}".format(i))
+#     i += 1
 
-# trace = go.Scatter3d(x=x_axis, y=y_axis, z=z_axis, showlegend=False, mode='markers',
-#                      marker=dict(size=1, color=['#FF0000', '#00FF00', '#0000FF', '#FF0000'],
-#                                  line=dict(color='black', width=1)))
-
-# fig = go.Figure(data=[go.Scatter3d(x=pointsPlot[:, 0], y=pointsPlot[:, 1], z=pointsPlot[:, 2],
-#                                    mode='markers')])
-# fig.show()
-
-# trace = go.Scatter3d(x=x_axis, y=y_axis, z=z_axis, mode='markers', marker=dict(
-#     size=12,
-#     line=dict(
-#         color='rgba(217, 217, 217, 0.14)',
-#         width=0.5
-#     ),
-#     opacity=0.8
-# ))
-#
-# data = [trace]
-# layout = go.Layout(
-#     margin=dict(
-#         l=0,
-#         r=0,
-#         b=0,
-#         t=0
-#     )
-# )
-# fig = go.Figure(data=data, layout=layout)
-# py.plot(fig, filename='test', fileopt='overwrite')
-
-# np.random.seed(5)
-#
-# fig = plotly.tools.make_subplots(rows=2, cols=3,
-#                                  print_grid=False,
-#                                  specs=[[{'is_3d': True}, {'is_3d': True}, {'is_3d': True}],
-#                                         [{'is_3d': True, 'rowspan': 1}, None, None]])
-# scene = dict(
-#     camera=dict(
-#         up=dict(x=0, y=0, z=1),
-#         center=dict(x=0, y=0, z=0),
-#         eye=dict(x=2.5, y=0.1, z=0.1)
-#     ),
-#     xaxis=dict(
-#         range=[-1, 4],
-#         title='Petal width',
-#         gridcolor='rgb(255, 255, 255)',
-#         zerolinecolor='rgb(255, 255, 255)',
-#         showbackground=True,
-#         backgroundcolor='rgb(230, 230,230)',
-#         showticklabels=False, ticks=''
-#     ),
-#     yaxis=dict(
-#         range=[4, 8],
-#         title='Sepal length',
-#         gridcolor='rgb(255, 255, 255)',
-#         zerolinecolor='rgb(255, 255, 255)',
-#         showbackground=True,
-#         backgroundcolor='rgb(230, 230,230)',
-#         showticklabels=False, ticks=''
-#     ),
-#     zaxis=dict(
-#         range=[1, 8],
-#         title='Petal length',
-#         gridcolor='rgb(255, 255, 255)',
-#         zerolinecolor='rgb(255, 255, 255)',
-#         showbackground=True,
-#         backgroundcolor='rgb(230, 230,230)',
-#         showticklabels=False, ticks=''
-#     )
-# )
-
-# centers = [[1, 1], [-1, -1], [1, -1]]
-# iris = datasets.load_iris()
-# X = iris.data
-# y = iris.target
-
-# estimators = {'k_means_iris_3': KMeans(n_clusters=3),
-#               'k_means_iris_8': KMeans(n_clusters=8),
-#               'k_means_iris_bad_init': KMeans(n_clusters=3, n_init=1,
-#                                               init='random')}
-# fignum = 1
-# for name, est in estimators.items():
-#     est.fit(X)
-#     labels = est.labels_
-#
-#     trace = go.Scatter3d(x=X[:, 3], y=X[:, 0], z=X[:, 2],
-#                          showlegend=False,
-#                          mode='markers',
-#                          marker=dict(
-#                              color=labels.astype(np.float),
-#                              line=dict(color='black', width=1)
-#                          ))
-#     fig.append_trace(trace, 1, fignum)
-#
-#     fignum = fignum + 1
-
-# y = np.choose(y, [1, 2, 0]).astype(np.float)
-#
-# trace1 = go.Scatter3d(x=X[:, 3], y=X[:, 0], z=X[:, 2],
-#                       showlegend=False,
-#                       mode='markers',
-#                       marker=dict(
-#                           color=y,
-#                           line=dict(color='black', width=1)))
-# fig.append_trace(trace1, 2, 1)
-#
-# fig['layout'].update(height=900, width=900,
-#                      margin=dict(l=10, r=10))
-#
-# fig['layout']['scene1'].update(scene)
-# fig['layout']['scene2'].update(scene)
-# fig['layout']['scene3'].update(scene)
-# fig['layout']['scene4'].update(scene)
-# fig['layout']['scene5'].update(scene)
-#
-# py.plot(fig)
-
-# plotly.tools.set_credentials_file(username='KhusDM', api_key='Z1Aj6ViW6P63pXVC4drS')
-# trace1 = go.Scatter3d(
-#     x=x_axis,
-#     y=y_axis,
-#     z=z_axis,
-#     mode='markers',
-#     marker=dict(
-#         size=2,
-#         line=dict(
-#             color='rgba(217, 217, 217, 0.14)',
-#             width=0.5
-#         ),
-#         opacity=0.8
-#     )
-# )
-#
-# data = [trace1]
-# layout = go.Layout(
-#     margin=dict(
-#         l=0,
-#         r=0,
-#         b=0,
-#         t=0
-#     )
-# )
-# fig = go.Figure(data=data, layout=layout)
-# py.plot(fig, filename='simple-3d-scatter', fileopt='overwrite')
-
-# kmeans = KMeans(n_clusters=4, random_state=0).fit(points)
-
-# x_axis = []
-# y_axis = []
-# z_axis = []
-# for point in points:
-#     x_axis.append(point[0])
-#     y_axis.append(point[1])
-#     z_axis.append((-1) * point[2])
-
-# fig = plt.figure()
-# ax = Axes3D(fig)
-# # ax = fig.add_subplot(111, projection='3d')
-# plt.scatter(x_axis, y_axis, z_axis, zdir="z")
-# ax.set_xlabel('X Label')
-# ax.set_ylabel('Y Label')
-# ax.set_zlabel('Z Label')
-# ax.set_xlim(min(x_axis), max(x_axis))
-# ax.set_ylim(min(y_axis), max(y_axis))
-# ax.set_zlim(min(z_axis), max(z_axis))
-# # ax.set_xlim(min(inFile.X), max(inFile.X))
-# # ax.set_ylim(min(inFile.Y), max(inFile.Y))
-# # ax.set_zlim(min(inFile.Z), max(inFile.Z))
-# # ax.set_xlim(min(inFile.X) + k, max(inFile.X) + k)
-# # ax.set_ylim(min(inFile.Y) + k, max(inFile.Y) + k)
-# # ax.set_zlim(min(inFile.Z) + k, max(inFile.Z) + k)
-# plt.show()
-
-# # Определяем модель и скорость обучения
-# model = TSNE(n_components=3, learning_rate=100)
-#
-# # Обучаем модель
-# transformed = model.fit_transform(points)
-#
-# # Представляем результат в двумерных координатах
-# x_axis = transformed[:, 0]
-# y_axis = transformed[:, 1]
-# z_axis = transformed[:, 2]
-#
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-# plt.scatter(x_axis, y_axis, z_axis)
-# ax.set_xlabel('X Label')
-# ax.set_ylabel('Y Label')
-# ax.set_zlabel('Z Label')
-# plt.show()
+h = 100
+mark_las(data['shapes'], a_x, b_x, a_y, b_y, skip_step=h)

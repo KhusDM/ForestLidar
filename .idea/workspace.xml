@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/forest.py" line="14" />
-    <bookmark url="file://$PROJECT_DIR$/forest.py" line="20" />
+    <bookmark url="file://$PROJECT_DIR$/forest.py" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="206891c9-fbfc-44c8-8ee8-929f3d09a1d3" name="Default Changelist" comment="" />
+    <list default="true" id="206891c9-fbfc-44c8-8ee8-929f3d09a1d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/forest.py" beforeDir="false" afterPath="$PROJECT_DIR$/forest.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-199">
-              <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
+            <state relative-caret-position="416">
+              <caret line="83" column="4" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -180,11 +181,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1377" height="780" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2613891" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26041666" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.32872504" />
@@ -264,8 +265,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199">
-          <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
+        <state relative-caret-position="416">
+          <caret line="83" column="4" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
