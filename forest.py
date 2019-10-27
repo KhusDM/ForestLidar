@@ -82,11 +82,11 @@ def mark_las(areas, a_x, b_x, a_y, b_y, skip_step=1):
         index += skip_step
 
     for key in points_by_areas.keys():
-        with open('label_files/{0}.txt'.format(key), 'a') as file:
+        with open('label_files2/{0}.txt'.format(key), 'a') as file:
             file.write(points_by_areas[key])
 
 
-filename = 'areas/area1.las'
+filename = 'areas/area2.las'
 inFile = laspy.file.File(filename, mode='r')
 inHeader = laspy.header.HeaderManager(inFile.header, inFile.reader)
 x_offset, y_offset, z_offset = inHeader.offset
@@ -106,20 +106,20 @@ print("Кол-во точек в файле: {0}".format(points_count))
 # h2 = 1
 # createLas(x=x2, y=y2, skip_step=h2, areaname="area2")
 
-with open('label_json/Box/Area1.json', 'r', encoding='utf-8') as json_file:
+with open('label_json/Box/Area2.json', 'r', encoding='utf-8') as json_file:
     data = json.load(json_file)
 
 # area1.las coefficients
-a_x = 0.06
-b_x = 4207282.48
-a_y = -0.06
-b_y = 7544038.32
+# a_x = 0.06
+# b_x = 4207282.48
+# a_y = -0.06
+# b_y = 7544038.32
 
 # area2.las coefficients
-# a_x = 0.06
-# b_x = 4207282.4
-# a_y = -0.052
-# b_y = 7543998.9
+a_x = 0.06
+b_x = 4207282.4
+a_y = -0.052
+b_y = 7543998.9
 
 # h = 1
 # i = 1
