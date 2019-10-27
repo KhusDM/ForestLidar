@@ -3,14 +3,13 @@ import json
 import plotly
 # import plotly.plotly as py
 import plotly.graph_objs as go
-# from sklearn.cluster import KMeans
 import numpy as np
 
 
 def createLas(x, y, areaname, skip_step=1):
     pointsLas = []
-    index = counter = 0
-    while (index + skip_step <= points_count):
+    index = 0
+    while (index < points_count):
         x_point = inFile.X[index] * x_scale + x_offset
         y_point = inFile.Y[index] * y_scale + y_offset
         z_point = inFile.Z[index] * z_scale + z_offset
@@ -19,17 +18,8 @@ def createLas(x, y, areaname, skip_step=1):
             pointsLas.append([inFile.X[index], inFile.Y[index], inFile.Z[index]])
 
         index += skip_step
-        counter += 1
 
-    points_area_count = len(pointsLas)
-    print("Кол-во точек для {0}: {1}".format(areaname, points_area_count))
-
-    # plotly.offline.plot({
-    #     "data": [go.Scatter3d(x=pointsPlot[:, 0], y=pointsPlot[:, 1], z=pointsPlot[:, 2], showlegend=False,
-    #                           mode='markers',
-    #                           marker=dict(size=1, color='green', line=dict(color='black', width=1)))],
-    #     "layout": go.Layout(margin=dict(l=0, r=0, b=0, t=0))
-    # }, filename="{0}_plot.html".format(areaname))
+    print("Кол-во точек для {0}: {1}".format(areaname, len(pointsLas)))
 
     pointsLas = np.array(pointsLas)
     outfile = laspy.file.File("tree_clouds\\{0}.las".format(areaname), mode="w", header=inFile.header)
@@ -47,7 +37,9 @@ def mark_las(areas, a_x, b_x, a_y, b_y, skip_step=1):
 
     index = 0
     points_by_areas = dict()
-    while (index + skip_step <= points_count):
+    points_by_areas['other_1'] = ''
+    points_by_areas['forest_1'] = ''
+    while (index < points_count):
         x_point = inFile.X[index] * x_scale + x_offset
         y_point = inFile.Y[index] * y_scale + y_offset
         z_point = inFile.Z[index] * z_scale + z_offset
@@ -69,14 +61,8 @@ def mark_las(areas, a_x, b_x, a_y, b_y, skip_step=1):
                 break
 
         if (not (isArea)):
-            if (not ('other_1' in points_by_areas)):
-                points_by_areas['other_1'] = ''
-
             r = g = b = 100
             points_by_areas['other_1'] += '{0} {1} {2} {3} {4} {5}\n'.format(x_point, y_point, z_point, r, g, b)
-
-        if (not ('forest_1' in points_by_areas)):
-            points_by_areas['forest_1'] = ''
 
         points_by_areas['forest_1'] += '{0} {1} {2} {3} {4} {5}\n'.format(x_point, y_point, z_point, r, g, b)
         index += skip_step
@@ -96,6 +82,7 @@ header = laspy.header.Header()
 points_count = len(inFile.points)
 print("Кол-во точек в файле: {0}".format(points_count))
 
+# Создание las - файлов областей с деревьями
 # x = [4207281, 4207335]
 # y = [7544002, 7544041]
 # h = 1
@@ -134,3 +121,10 @@ b_y = 7543998.9
 
 h = 100
 mark_las(data['shapes'], a_x, b_x, a_y, b_y, skip_step=h)
+
+# plotly.offline.plot({
+#     "data": [go.Scatter3d(x=pointsPlot[:, 0], y=pointsPlot[:, 1], z=pointsPlot[:, 2], showlegend=False,
+#                           mode='markers',
+#                           marker=dict(size=1, color='green', line=dict(color='black', width=1)))],
+#     "layout": go.Layout(margin=dict(l=0, r=0, b=0, t=0))
+# }, filename="{0}_plot.html".format(areaname))
