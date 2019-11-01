@@ -1,5 +1,6 @@
 import laspy
-import numpy as np
+import math
+import pandas as pd
 
 filename = 'areas/den.las'
 inFile = laspy.file.File(filename, mode='r')
@@ -10,19 +11,35 @@ x_scale, y_scale, z_scale = inHeader.scale
 points_count = len(inFile.points)
 print("Кол-во точек в файле: {0}".format(points_count))
 
-area_size = 1000000
-pointsLas = []
-area_counter = 1
-for i in range(points_count):
-    pointsLas.append([inFile.X[i], inFile.Y[i], inFile.Z[i]])
-    if ((i + 1) % area_size == 0 or i == points_count - 1):
-        pointsLas = np.array(pointsLas)
-        outfile = laspy.file.File("dendrarium_areas\\d_area_{0}.las".format(area_counter), mode="w",
-                                  header=inFile.header)
-        outfile.X = pointsLas[:, 0]
-        outfile.Y = pointsLas[:, 1]
-        outfile.Z = pointsLas[:, 2]
-        outfile.close()
+avg_area_size = 1000000
+areas_count = math.ceil(points_count / avg_area_size)
+x_min, x_max = min(inFile.X), max(inFile.X)
+x_abs = x_max - x_min
+x_step = math.ceil(x_abs / areas_count)
+print(x_min, x_max, areas_count, x_abs, x_step)
 
-        area_counter += 1
-        pointsLas = []
+df = pd.DataFrame({
+    "X": inFile.X,
+    "Y": inFile.Y,
+    "Z": inFile.Z,
+    "Blue": inFile.Blue,
+    "Green": inFile.Green,
+    "Red": inFile.Red
+}).sort_values(by=["X"])
+# print(df)
+
+x0 = x_min
+x1 = x0 + x_step
+for i in range(areas_count):
+    area_df = df[(df.X >= x0) & (df.X < x1)]
+    outfile = laspy.file.File("dendrarium_areas/d_area_{0}.las".format(i + 1), mode="w", header=inFile.header)
+    outfile.X = area_df["X"].tolist()
+    outfile.Y = area_df["Y"].tolist()
+    outfile.Z = area_df["Z"].tolist()
+    outfile.Blue = area_df["Blue"].tolist()
+    outfile.Green = area_df["Green"].tolist()
+    outfile.Red = area_df["Red"].tolist()
+    outfile.close()
+
+    x0 = x1
+    x1 += x_step
